@@ -79,7 +79,7 @@ class BankAppMenu {
                      ) {
                     if(kNO== a.getAccountNo()){
                         System.out.printf("in konto nr:%d, \n How much should be deposited: ",kNO);
-                        Double x = sc.nextDouble();
+                        double x = sc.nextDouble();
                         a.deposit(x);}
 
                 }
@@ -92,7 +92,7 @@ class BankAppMenu {
                 ) {
                     if(kNO2== a.getAccountNo()){
                         System.out.printf("in konto nr:%d, \n How much should be withdrawed: ",kNO2);
-                        Double x = sc.nextDouble();
+                        double x = sc.nextDouble();
                         a.withdraw(x);}
 
                 }
