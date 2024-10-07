@@ -80,9 +80,10 @@ class Account {
     public void amountNAnnualInterest(int years) {
         for (int i = 1; i <= years; i++) {
             annualInterest();
-            System.out.printf("År %d:\n", i);
-            System.out.println(toString());
+
+
         }
+        System.out.println(toString());
     }
 
 
@@ -98,6 +99,10 @@ class Account {
 
     public double getBalance() {
         return balance;
+    }
+
+    public int getAccountNo() {
+        return accountNo;
     }
 
     @Override
