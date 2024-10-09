@@ -21,8 +21,9 @@ public class BankApp2 {
         /*System.out.println(a1.toString());
         System.out.println(a2.toString());
          */
-        a1.printTransactions();
+       a1.printTransactions();
         System.out.println();
+
         a2.printTransactions();
         System.out.println();
 
@@ -39,6 +40,7 @@ class Account {
     protected double interestRate;
     private ArrayList<Transactions> transactions = new ArrayList<>();
     static private int noOfAccount=1;
+
 
 
     Account(String ow, double rate) {
@@ -96,6 +98,7 @@ class Account {
         }
 
     }
+
 
     public double getBalance() {
         return balance;

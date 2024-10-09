@@ -40,7 +40,7 @@ class BankAppMenu {
         System.out.println("Tast 0: Afslut program");
         System.out.println("Indtast et tal [0,5]: ");
         int input = sc.nextInt();
-        if (input == 0) {break;}
+        if (input == 0) {System.out.println("Closed");break;} //before anything else has to be posible then it has to check if the input is 0
         choicesAccount(input);
 
 
@@ -48,9 +48,9 @@ class BankAppMenu {
     }
     }
 
-    public void choicesAccount(int input) {
+    public void choicesAccount(int input) {                      //Makes the Input posible from the while loop
         switch (input) {
-            case 1:
+            case 1: //create an  account
                 System.out.println("Indtast Navn: " );
                 String navn = sc. next();
                 System.out.println("Indtast rente: ");
@@ -59,10 +59,10 @@ class BankAppMenu {
                 System.out.println("Type af konto: 1. Normal, 2. Indlån, 3. Højrente, 4. Kredit, 5. MilionærKonto, 6. BørneOpsparing ");
                 int inputType= sc.nextInt();
 
-                typeAccountCreator(inputType,navn, rente);
+                typeAccountCreator(inputType,navn, rente); //sends the choice of inputtype through an instance of method paramether
 
-                break;
-            case 2:
+                break; //break breaks the proces though the switch
+            case 2: //Show transactions for every account
                 System.out.println("All Transactions)"); // need a rework on the print of transactions
                 for (Account a:accountArrayList
                      ) {
@@ -71,7 +71,7 @@ class BankAppMenu {
 
                 }
                 break;
-            case 3:
+            case 3: //deposit to specific account
                 System.out.println("Choose konto nr: ");
                 int kNO= sc.nextInt();
 
@@ -84,7 +84,7 @@ class BankAppMenu {
 
                 }
                 break;
-            case 4:
+            case 4: //Withdraw from specific account
                 System.out.println("Choose konto nr: ");
                 int kNO2= sc.nextInt();
 
@@ -97,7 +97,7 @@ class BankAppMenu {
 
                 }
                 break;
-            case 5:
+            case 5: //Chooses the amount of years gone by
                 System.out.println("How many years have gone by?: ");
                 int yearsGoneBy= sc.nextInt();
                 for (Account a: accountArrayList
@@ -105,21 +105,26 @@ class BankAppMenu {
                     a.amountNAnnualInterest(yearsGoneBy);
 
                 }
+            
+
+
+
+
 
 
 
         }
     }
-    public void typeAccountCreator(int inputType, String navn, int rente){
-        switch (inputType){
-            case 1:
+    public void typeAccountCreator(int inputType, String navn, int rente){ //This was made because of code complexity
+        switch (inputType){ //Type af konto:, , , , ,
+            case 1:  //1. Normal
                 Account account = new Account(navn,rente);
                 accountArrayList.add(account);
                 for (Account a : accountArrayList) {
                     System.out.println(a);
                 }
                 break;
-            case 2:
+            case 2://2. Indlån
                 Indlaan indlaanAccount = new Indlaan(navn,rente);
                 accountArrayList.add(indlaanAccount);
                 for (Account a: accountArrayList
@@ -128,7 +133,7 @@ class BankAppMenu {
 
                 }
                 break;
-            case 3:
+            case 3://3. Højrente
                 System.out.println("Vælg startbalance");
                 double sb = sc.nextDouble();
                 System.out.println("Løslades den? (år 'Enter' måned 'Enter' dag)");
@@ -144,7 +149,7 @@ class BankAppMenu {
 
                 }
                 break;
-            case 4:
+            case 4://4. Kredit
                 System.out.println("Vælg startbalance/MaxWithdraw");
                 double sb2 = sc.nextDouble();
                 System.out.println("Max");
@@ -158,7 +163,7 @@ class BankAppMenu {
 
                 }
                 break;
-            case 5:
+            case 5://5. MilionærKonto
                 System.out.println("Indsæt en pulje:  ");
                 double pulje = sc.nextDouble();
                 System.out.println("Indsæt nummeret af personer der deltager: ");
@@ -173,7 +178,7 @@ class BankAppMenu {
 
                 }
                 break;
-            case 6:
+            case 6://6. BørneOpsparing
                 System.out.println("Vælg startbalance");
                 double sb3 = sc.nextDouble();
                 System.out.println("Indtast Barns alder: ");
