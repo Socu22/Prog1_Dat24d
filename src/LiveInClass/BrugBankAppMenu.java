@@ -2,18 +2,13 @@ package LiveInClass;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class BrugBankAppMenu{
     public static void main(String[] args) {
         BankAppMenu m1 = new BankAppMenu();
         m1.hovedeMenu();
-        //m1.choicesAccount(m1.A,m1.B);
-
-
-
-
-
 
 
 
@@ -23,6 +18,31 @@ class BankAppMenu {
 
     public static Scanner sc = new Scanner(System.in);
     public static ArrayList<Account> accountArrayList = new ArrayList<>();
+    public  int inputInt;
+    public  double inputDouble;
+
+
+    public int scInputIntReciver() throws InputMismatchException {
+        try {
+            inputInt = sc.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Fejl: Indtast venligst et gyldigt tal.");
+            sc.nextLine();  // Ryd scannerens buffer
+            throw e;  // Kaster undtagelsen videre
+        }
+        return inputInt;
+    }
+    public double scInputDoubleReciver() throws InputMismatchException {
+        try {
+            inputDouble = sc.nextDouble();
+        } catch (InputMismatchException e) {
+            System.out.println("Fejl: Indtast venligst et gyldigt tal.");
+            sc.nextLine();  // Ryd scannerens buffer
+            throw e;  // Kaster undtagelsen videre
+        }
+        return inputDouble;
+    }
+
 
 
 
@@ -39,72 +59,101 @@ class BankAppMenu {
         System.out.println("Tast 5: Årlig rentetilskrivning");
         System.out.println("Tast 0: Afslut program");
         System.out.println("Indtast et tal [0,5]: ");
-        int input = sc.nextInt();
-        if (input == 0) {System.out.println("Closed");break;} //before anything else has to be posible then it has to check if the input is 0
-        choicesAccount(input);
+       int in = scInputIntReciver();
+       if (in == 0) {System.out.println("Closed");break;} //before anything else has to be posible then it has to check if the input is 0choicesAccount(in);
+        choicesAccount(in);
+
+
 
 
 
     }
     }
 
-    public void choicesAccount(int input) {                      //Makes the Input posible from the while loop
+    /*public void choicesAccount(int input) {                      //Makes the Input posible from the while loop
+
         switch (input) {
             case 1: //create an  account
                 System.out.println("Indtast Navn: " );
                 String navn = sc. next();
                 System.out.println("Indtast rente: ");
-                int rente = sc.nextInt();
 
-                System.out.println("Type af konto: 1. Normal, 2. Indlån, 3. Højrente, 4. Kredit, 5. MilionærKonto, 6. BørneOpsparing ");
-                int inputType= sc.nextInt();
+                try {
+                    int rente = sc.nextInt();
 
-                typeAccountCreator(inputType,navn, rente); //sends the choice of inputtype through an instance of method paramether
+                    System.out.println("Type af konto: 1. Normal, 2. Indlån, 3. Højrente, 4. Kredit, 5. MilionærKonto, 6. BørneOpsparing ");
+                    int inputType= sc.nextInt();
 
-                break; //break breaks the proces though the switch
-            case 2: //Show transactions for every account
-                System.out.println("All Transactions)"); // need a rework on the print of transactions
-                for (Account a:accountArrayList
-                     ) {
+                    typeAccountCreator(inputType,navn, rente); //sends the choice of inputtype through an instance of method paramether
 
-                        a.printTransactions();
+                }catch (InputMismatchException e){
+                    System.out.println("Fejl: Ugyldigt input for rente eller kontotype.");
 
                 }
+
+                break; //break breaks the proces though the switch
+            case 2: //Show transactions for specifik account
+                System.out.println("Choose konto nr: ");
+                try {
+                    int kontoNr = scInputIntReciver();
+                    for (Account a : accountArrayList) {
+                        if (kontoNr == a.getAccountNo()) {
+                            a.printTransactions();
+                        }
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Fejl: Ugyldigt kontonummer.");
+                }
                 break;
+
             case 3: //deposit to specific account
                 System.out.println("Choose konto nr: ");
-                int kNO= sc.nextInt();
 
-                for (Account a: accountArrayList
-                     ) {
-                    if(kNO== a.getAccountNo()){
-                        System.out.printf("in konto nr:%d, \n How much should be deposited: ",kNO);
-                        double x = sc.nextDouble();
-                        a.deposit(x);}
-
+                try {
+                    int kontoNr = scInputIntReciver();
+                    for (Account a : accountArrayList) {
+                        if (kontoNr == a.getAccountNo()) {
+                            System.out.printf("Indsæt beløb til konto nr: %d\n", kontoNr);
+                            double x = sc.nextDouble();
+                            a.deposit(x);
+                        }
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Fejl: Ugyldigt input, prøv igen.");
+                    sc.nextLine();  // Ryd scannerens buffer
                 }
                 break;
             case 4: //Withdraw from specific account
                 System.out.println("Choose konto nr: ");
-                int kNO2= sc.nextInt();
-
-                for (Account a: accountArrayList
-                ) {
-                    if(kNO2== a.getAccountNo()){
-                        System.out.printf("in konto nr:%d, \n How much should be withdrawed: ",kNO2);
-                        double x = sc.nextDouble();
-                        a.withdraw(x);}
-
+                try {
+                    int kontoNr = scInputIntReciver();
+                    for (Account a : accountArrayList) {
+                        if (kontoNr == a.getAccountNo()) {
+                            System.out.printf("Hæv beløb fra konto nr: %d\n", kontoNr);
+                            double x = sc.nextDouble();
+                            a.withdraw(x);
+                        }
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Fejl: Ugyldigt input, prøv igen.");
+                    sc.nextLine();  // Ryd scannerens buffer
                 }
                 break;
             case 5: //Chooses the amount of years gone by
                 System.out.println("How many years have gone by?: ");
-                int yearsGoneBy= sc.nextInt();
-                for (Account a: accountArrayList
-                     ) {
-                    a.amountNAnnualInterest(yearsGoneBy);
-
+                try {
+                    int yearsGoneBy = scInputIntReciver();
+                    for (Account a : accountArrayList) {
+                        a.amountNAnnualInterest(yearsGoneBy);
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Fejl: Ugyldigt input for år.");
                 }
+                break;
+
+            default:
+                System.out.println("Ugyldigt valg.");
+                break;
             
 
 
@@ -115,84 +164,167 @@ class BankAppMenu {
 
         }
     }
+
+     */
+    public void choicesAccount(int input) {
+        switch (input) {
+            case 1: // Opret konto
+                createAccount();
+                break;
+            case 2: // KontoUdskrift
+                showTransactions();
+                break;
+            case 3: // Indsæt penge
+                depositToAccount();
+                break;
+            case 4: // Hæv penge
+                withdrawFromAccount();
+                break;
+            case 5: // Årlig rentetilskrivning
+                applyAnnualInterest();
+                break;
+            default:
+                System.out.println("Ugyldigt valg.");
+                break;
+        }
+    }
+
+    public void createAccount() {
+        System.out.println("Indtast Navn: ");
+        String navn = sc.next();
+        System.out.println("Indtast rente: ");
+
+        try {
+            int rente = scInputIntReciver();
+            System.out.println("Type af konto: 1. Normal, 2. Indlån, 3. Højrente, 4. Kredit, 5. MilionærKonto, 6. BørneOpsparing ");
+            int inputType = scInputIntReciver();
+            typeAccountCreator(inputType, navn, rente);
+        } catch (InputMismatchException e) {
+            System.out.println("Fejl: Ugyldigt input for rente eller kontotype.");
+        }
+    }
+
+    public void showTransactions() {
+        System.out.println("Vælg konto nr: ");
+        try {
+            int kontoNr = scInputIntReciver();
+            for (Account a : accountArrayList) {
+                if (kontoNr == a.getAccountNo()) {
+                    a.printTransactions();
+                }
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Fejl: Ugyldigt kontonummer.");
+        }
+    }
+
+    public void depositToAccount() {
+        System.out.println("Vælg konto nr: ");
+        try {
+            int kontoNr = scInputIntReciver();
+            for (Account a : accountArrayList) {
+                if (kontoNr == a.getAccountNo()) {
+                    System.out.printf("Indsæt beløb til konto nr: %d\n", kontoNr);
+                    double x = scInputDoubleReciver();
+                    a.deposit(x);
+                }
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Fejl: Ugyldigt input, prøv igen.");
+        }
+    }
+
+    public void withdrawFromAccount() {
+        System.out.println("Vælg konto nr: ");
+        try {
+            int kontoNr = scInputIntReciver();
+            for (Account a : accountArrayList) {
+                if (kontoNr == a.getAccountNo()) {
+                    System.out.printf("Hæv beløb fra konto nr: %d\n", kontoNr);
+                    double x = scInputDoubleReciver();
+                    a.withdraw(x);
+                }
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Fejl: Ugyldigt input, prøv igen.");
+        }
+    }
+
+    public void applyAnnualInterest() {
+        System.out.println("Hvor mange år er gået?");
+        try {
+            int yearsGoneBy = scInputIntReciver();
+            for (Account a : accountArrayList) {
+                a.amountNAnnualInterest(yearsGoneBy);
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Fejl: Ugyldigt input for år.");
+        }
+    }
     public void typeAccountCreator(int inputType, String navn, int rente){ //This was made because of code complexity
-        switch (inputType){ //Type af konto:, , , , ,
-            case 1:  //1. Normal
-                Account account = new Account(navn,rente);
+        switch (inputType) {
+            case 1: // Normal
+                Account account = new Account(navn, rente);
                 accountArrayList.add(account);
-                for (Account a : accountArrayList) {
-                    System.out.println(a);
-                }
                 break;
-            case 2://2. Indlån
-                Indlaan indlaanAccount = new Indlaan(navn,rente);
+            case 2: // Indlån
+                Indlaan indlaanAccount = new Indlaan(navn, rente);
                 accountArrayList.add(indlaanAccount);
-                for (Account a: accountArrayList
-                ) {
-                    System.out.println(a);
-
+                break;
+            case 3: // Højrente
+                try {
+                    System.out.println("Vælg startbalance:");
+                    double startBalance = scInputDoubleReciver();
+                    System.out.println("Løslades den? (år 'Enter' måned 'Enter' dag)");
+                    int år = scInputIntReciver();
+                    int måned = scInputIntReciver();
+                    int dag = scInputIntReciver();
+                    Højrente højrenteAccount = new Højrente(navn, rente, startBalance, LocalDate.of(år, måned, dag));
+                    accountArrayList.add(højrenteAccount);
+                } catch (InputMismatchException e) {
+                    System.out.println("Fejl: Ugyldigt input ved oprettelse af Højrente-konto.");
                 }
                 break;
-            case 3://3. Højrente
-                System.out.println("Vælg startbalance");
-                double sb = sc.nextDouble();
-                System.out.println("Løslades den? (år 'Enter' måned 'Enter' dag)");
-                int år = sc.nextInt();
-                int måned = sc.nextInt();
-                int dag = sc.nextInt();
-
-                Højrente højrenteAccount = new Højrente(navn,rente,sb, LocalDate.of(år,måned,dag));
-                accountArrayList.add(højrenteAccount);
-                for (Account a: accountArrayList
-                ) {
-                    System.out.println(a);
-
+            case 4: // Kredit
+                try {
+                    System.out.println("Vælg startbalance:");
+                    double startBalance = scInputDoubleReciver();
+                    Kredit kreditAccount = new Kredit(navn, rente, startBalance, startBalance);
+                    accountArrayList.add(kreditAccount);
+                } catch (InputMismatchException e) {
+                    System.out.println("Fejl: Ugyldigt input ved oprettelse af Kredit-konto.");
                 }
                 break;
-            case 4://4. Kredit
-                System.out.println("Vælg startbalance/MaxWithdraw");
-                double sb2 = sc.nextDouble();
-                System.out.println("Max");
-
-
-                Kredit kreditAccount = new Kredit(navn,rente,sb2, sb2);
-                accountArrayList.add(kreditAccount);
-                for (Account a: accountArrayList
-                ) {
-                    System.out.println(a);
-
+            case 5: // MilionærKonto
+                try {
+                    System.out.println("Indsæt en pulje: ");
+                    double pulje = scInputDoubleReciver();
+                    System.out.println("Indsæt antal deltagere: ");
+                    int udaf = scInputIntReciver();
+                    char procent = '%';
+                    System.out.printf("Chancen for at vinde puljen ud af %d personer er %.2f%c\n", udaf, 100.0 / udaf, procent);
+                    MilionærKonto milionærAccount = new MilionærKonto(navn, rente, pulje, udaf);
+                    accountArrayList.add(milionærAccount);
+                } catch (InputMismatchException e) {
+                    System.out.println("Fejl: Ugyldigt input ved oprettelse af MilionærKonto.");
                 }
                 break;
-            case 5://5. MilionærKonto
-                System.out.println("Indsæt en pulje:  ");
-                double pulje = sc.nextDouble();
-                System.out.println("Indsæt nummeret af personer der deltager: ");
-                int udaf = sc.nextInt();
-                char procent = '%';
-                System.out.printf("ud af %d personer er der en chance for at få puljen %f, Chancen for at vinde er %f %c \n ",udaf,pulje,1f/udaf*100f,procent);
-                MilionærKonto milionærAccount = new MilionærKonto(navn,rente,pulje,udaf);
-                accountArrayList.add(milionærAccount);
-                for (Account a: accountArrayList
-                ) {
-                    System.out.println(a);
-
+            case 6: // BørneOpsparing
+                try {
+                    System.out.println("Vælg startbalance:");
+                    double startBalance = scInputDoubleReciver();
+                    System.out.println("Indtast barnets alder:");
+                    int alder = scInputIntReciver();
+                    System.out.println("Indtast alder ved frigørelse:");
+                    int alderFrigør = scInputIntReciver();
+                    BørneOpsparing børneOpsparingAccount = new BørneOpsparing(navn, rente, startBalance, alder, alderFrigør);
+                    accountArrayList.add(børneOpsparingAccount);
+                } catch (InputMismatchException e) {
+                    System.out.println("Fejl: Ugyldigt input ved oprettelse af BørneOpsparing.");
                 }
                 break;
-            case 6://6. BørneOpsparing
-                System.out.println("Vælg startbalance");
-                double sb3 = sc.nextDouble();
-                System.out.println("Indtast Barns alder: ");
-                int alder = sc.nextInt();
-                System.out.println("Indtast Frigør konto alder: ");
-                int alderFrigør = sc.nextInt();
-                BørneOpsparing børneOpsparingAccount = new BørneOpsparing(navn,rente,sb3,alder,alderFrigør);
-                accountArrayList.add(børneOpsparingAccount);
-                for (Account a: accountArrayList
-                ) {
-                    System.out.println(a);
-
-                }
-                break;
+            default:
+                System.out.println("Ugyldig kontotype.");
 
 
 
