@@ -8,7 +8,7 @@ public class Lek2 {
         double euro=0;
         double dollar=66.66;
         double sum;
-        double gennemsnit;
+        double f;
 
 
 
@@ -37,8 +37,8 @@ public class Lek2 {
 
         sum =randomTal+randomTal2+randomTal3;
         System.out.println("sum "+sum);
-        gennemsnit = sum/3;
-        System.out.println("gennemsnit af 3 randomtal :  "+gennemsnit);
+        f = sum/3;
+        System.out.println("f af 3 randomtal :  "+f);
 
 
 

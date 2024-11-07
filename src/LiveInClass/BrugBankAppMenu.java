@@ -48,6 +48,7 @@ class BankAppMenu {
 
     public void hovedeMenu() {
 
+
         while (true) {
 
 
@@ -62,6 +63,8 @@ class BankAppMenu {
        int in = scInputIntReciver();
        if (in == 0) {System.out.println("Closed");break;} //before anything else has to be posible then it has to check if the input is 0choicesAccount(in);
         choicesAccount(in);
+
+       sc.nextLine();
 
 
 

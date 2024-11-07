@@ -18,7 +18,7 @@ public class ArrayDemo { ///live demostrration of how arrays work and what it is
 
         double g = avg(num);
         double g2 = avg(num2);
-        System.out.println("Gennemsnit: 1: "+g+"\nGennemsnit 2: "+g2);
+        System.out.println("f: 1: "+g+"\nf 2: "+g2);
     }
     public static double avg (int[] arr){
         double sum = 0;
