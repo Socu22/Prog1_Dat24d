@@ -3,10 +3,10 @@ package MyTests;
 import java.util.Scanner;
 
 public class InputHandler {
-    public static Scanner sc = new Scanner(System.in);
+     static Scanner sc = new Scanner(System.in);
 
     // Method to receive an integer
-    public static int getInt() {
+     static int getInt() {
         System.out.print("Enter an integer: ");
         while (!sc.hasNextInt()) {
             System.out.print("Invalid input. Please enter an integer: ");
@@ -16,7 +16,7 @@ public class InputHandler {
     }
 
     // Method to receive a double
-    public static double getDouble() {
+     static double getDouble() {
         System.out.print("Enter a double: ");
         while (!sc.hasNextDouble()) {
             System.out.print("Invalid input. Please enter a double: ");
@@ -26,20 +26,20 @@ public class InputHandler {
     }
 
     // Method to receive a string
-    public static String getString() {
+     static String getString() {
         System.out.print("Enter a string: ");
         return sc.next();
     }
 
     // Method to receive a line of text
-    public static String getLine() {
+     static String getLine() {
         System.out.print("Enter a line of text: ");
         sc.nextLine(); // Clear buffer
         return sc.nextLine();
     }
 
     // Method to receive a boolean
-    public static boolean getBoolean() {
+     static boolean getBoolean() {
         System.out.print("Enter 'true' or 'false': ");
         while (!sc.hasNextBoolean()) {
             System.out.print("Invalid input. Please enter 'true' or 'false': ");
@@ -49,7 +49,7 @@ public class InputHandler {
     }
 
     // Method to receive a character
-    public static char getChar() {
+     static char getChar() {
         System.out.print("Enter a character: ");
         String input = sc.next();
         while (input.length() != 1) {
@@ -60,7 +60,7 @@ public class InputHandler {
     }
 
     // Method to receive an integer within a range
-    public static int getIntInRange(int min, int max) {
+     static int getIntInRange(int min, int max) {
         System.out.print("Enter an integer between " + min + " and " + max + ": ");
         int num;
         while (true) {
@@ -76,7 +76,7 @@ public class InputHandler {
     }
 
     // Method to receive a floating-point number with custom validation
-    public static double getDoubleInRange(double min, double max) {
+     static double getDoubleInRange(double min, double max) {
         System.out.print("Enter a double between " + min + " and " + max + ": ");
         double num;
         while (true) {
@@ -92,7 +92,7 @@ public class InputHandler {
     }
 
     // Method to receive an array of integers
-    public static int[] getIntArray(int size) {
+     static int[] getIntArray(int size) {
         int[] array = new int[size];
         System.out.println("Enter " + size + " integers:");
         for (int i = 0; i < size; i++) {
@@ -102,7 +102,7 @@ public class InputHandler {
     }
 
     // Method to receive an array of strings
-    public static String[] getStringArray(int size) {
+     static String[] getStringArray(int size) {
         String[] array = new String[size];
         System.out.println("Enter " + size + " strings:");
         for (int i = 0; i < size; i++) {
@@ -112,7 +112,7 @@ public class InputHandler {
     }
 
     // Method to receive a list of floating-point numbers
-    public static double[] getDoubleArray(int size) {
+     static double[] getDoubleArray(int size) {
         double[] array = new double[size];
         System.out.println("Enter " + size + " doubles:");
         for (int i = 0; i < size; i++) {
@@ -122,7 +122,7 @@ public class InputHandler {
     }
 
     // Method to receive a yes/no confirmation
-    public static boolean getConfirmation() {
+     static boolean getConfirmation() {
         System.out.print("Enter 'y' for yes or 'n' for no: ");
         String input = sc.next().toLowerCase();
         while (!input.equals("y") && !input.equals("n")) {

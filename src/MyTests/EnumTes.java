@@ -20,7 +20,7 @@ public class EnumTes {
     }
 }
 
-class User{
+class User_ {
     String _name;
     int _credit;
     String _title;
@@ -28,7 +28,7 @@ class User{
     int userCounter;
     static Scanner sc = new Scanner(System.in);
 
-    User(String name, int credit){
+    User_(String name, int credit){
         userCounter++;
         this._id=userCounter;
         this._name=name;
@@ -63,11 +63,11 @@ class User{
 
     }
     private void titleHandler(){
-        if(get_credit()<50){set_Title(User.Title.Poor);}
-        else if (get_credit()>50 && get_credit() < 500) {set_Title(User.Title.Middle);}
-        else if (get_credit()>500 && get_credit() < 5000) {set_Title(User.Title.Rich);}
-        else if (get_credit()>5000 && get_credit() < 50000) {set_Title(User.Title.CountryRich);}
-        else if (get_credit()>50000 && get_credit() < 500000) {set_Title(User.Title.WorldRich);}
+        if(get_credit()<50){set_Title(User_.Title.Poor);}
+        else if (get_credit()>50 && get_credit() < 500) {set_Title(User_.Title.Middle);}
+        else if (get_credit()>500 && get_credit() < 5000) {set_Title(User_.Title.Rich);}
+        else if (get_credit()>5000 && get_credit() < 50000) {set_Title(User_.Title.CountryRich);}
+        else if (get_credit()>50000 && get_credit() < 500000) {set_Title(User_.Title.WorldRich);}
 
 
     }
@@ -92,8 +92,8 @@ class User{
     }
 }
 class Menu{
-    static User u;
-    static ArrayList<User> userArrayList = new ArrayList<>();
+    static User_ u;
+    static ArrayList<User_> userArrayList = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
 
     public void menuStarter(int input){
@@ -104,14 +104,14 @@ class Menu{
 
 
 
-                userArrayList.add(new User(sc.nextLine(),sc.nextInt()));
+                userArrayList.add(new User_(sc.nextLine(),sc.nextInt()));
                 break;
 
 
             case 2: //Deposit Credit
             case 3: //Withdraw Credit
             case 4: //Show users
-                for(User u : userArrayList){
+                for(User_ u : userArrayList){
                     System.out.println(u);
                 }
                 break;
