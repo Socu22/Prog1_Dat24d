@@ -1,6 +1,6 @@
 package ExameØvelse;
 
-public class test3 {
+public class LongestStringWithStringSplitMethod {
     public static void main(String[] args) {
         String str = "how to split a string in java";
         String[] arrOfStr = str.split(" "); // Split the string into words

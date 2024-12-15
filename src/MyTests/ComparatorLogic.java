@@ -48,24 +48,7 @@ public class ComparatorLogic {
         synList.sort(Comparator.comparingInt(String::hashCode));
         System.out.println("SynList: " + synList);
 
-        String s = "SSSSS ssss SS SS SS SS SS";
-        s = s.replace("ssss", "");
-        s = s.replace("SS", "");
-        System.out.println(s);
 
-        String string = "anna";
-        String sj = "";
-        char ch;
-        for (int i = 0; i < string.length(); i++) {
-            ch = string.charAt(i);
-            sj = ch + sj;
-        }
-
-        System.out.println(sj);
-
-        if(string.equals(sj)){
-            System.out.println(string+"="+sj);
-        }
 
 
     }

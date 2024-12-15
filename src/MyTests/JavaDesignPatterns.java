@@ -1,7 +1,6 @@
 package MyTests;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
+import java.lang.ref.Cleaner;
 import java.util.EnumMap;
 
 public class JavaDesignPatterns {
@@ -142,7 +141,80 @@ class LoginContext {
 
 class AbstractFactoryPattern{//https://medium.com/@minadev/solving-everyday-problems-essential-java-design-patterns-you-need-to-know-01dba2939b45#:~:text=Abstract%20Factory%20Pattern%3A
 
+    public static void main(String[] args) {
+        FactoryVilla fv = new FactoryVilla();
+        Client fvClient = new Client(fv);
+        Building fvReceiver= fvClient.getpBuilding();
+        fvReceiver.print();
+
+        FactoryTower ft = new FactoryTower();
+        Client ftClient= new Client(ft);
+        Building ftReceiver= ftClient.getpBuilding();
+        ftReceiver.print();
+    }
 }
+abstract class Building {
+    int etager;
+    String name;
+
+    Building(String name, int etager){
+        this.name=name;
+        this.etager=etager;
+    }
+    public abstract void print();
+
+
+}
+class Building_vila extends Building {
+    Building_vila(String name, int etager) {
+        super(name, etager);
+    }
+
+    @Override
+    public void print() {
+        System.out.println("Villa:\n \tname:"+name+"\n\t"+"etager: "+etager);
+
+    }
+
+}
+class Building_tower extends Building {
+    Building_tower(String name, int etager) {
+        super(name, etager);
+    }
+
+    @Override
+    public void print() {
+        System.out.println("Tower:\n \tname:"+name+"\n\t"+"etager: "+etager);
+
+    }
+
+}
+interface Factory{
+    Building createBuilding();
+}
+class FactoryVilla implements  Factory{
+    @Override
+    public Building createBuilding() {
+        return new Building_vila("GayHouse",3);
+    }
+}
+class FactoryTower implements  Factory{
+    @Override
+    public Building createBuilding() {
+        return new Building_tower("GayTower",30);
+    }
+}
+class Client{
+    private Building pBuilding;
+    Client(Factory factory){
+        pBuilding=factory.createBuilding();
+    }
+
+    public Building getpBuilding() {
+        return pBuilding;
+    }
+}
+
 
 class BuilderPattern{
     public static void main(String[] args) {
@@ -151,6 +223,7 @@ class BuilderPattern{
                 .phone("234355")
                 .build();
         System.out.println(user);
+
     }
 
 }
